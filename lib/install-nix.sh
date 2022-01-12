@@ -6,6 +6,9 @@ if type -p nix &>/dev/null ; then
   exit
 fi
 
+# Not always set (e.g. Docker+Ubuntu)
+USER=${USER:-$(whoami)}
+
 # Create a temporary workdir
 workdir=$(mktemp -d)
 trap 'rm -rf "$workdir"' EXIT
@@ -66,7 +69,11 @@ do
   fi
 done
 
+echo running the installer
+set -x
 sh "$workdir/install" "${installer_options[@]}"
+set +x
+echo installer run completed
 
 if [[ $OSTYPE =~ darwin ]]; then
   # macOS needs certificates hints
