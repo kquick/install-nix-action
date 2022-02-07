@@ -69,7 +69,30 @@ do
   fi
 done
 
-echo running the installer
+echo =================================== INSTALLER
+cat $workdir/install
+echo =================================== PROC
+ls /proc
+echo =================================== PROC/SYS/KERNEL
+sudo ls /proc/sys/kernel
+echo =================================== LXC?
+# sudo apt update
+# sudo apt upgrade
+# sudo apt install -y lxd
+# Now wants snap
+# sudo snap install lxd
+# but snap server is not running
+set -x
+# sudo adduser $USER lxd
+# newgrp lxd
+id
+echo lxc list
+echo =================================== SYSCTL
+# sudo sysctl -w kernel.unprivileged_userns_clone=1
+echo =================================== UMOUNT
+sudo umount /proc/{cpuinfo,diskstats,meminfo,stat,uptime}
+echo ===================================
+echo running the installer as $(whoami)
 set -x
 sh "$workdir/install" "${installer_options[@]}"
 set +x
