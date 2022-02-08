@@ -90,7 +90,7 @@ echo lxc list
 echo =================================== SYSCTL
 # sudo sysctl -w kernel.unprivileged_userns_clone=1
 echo =================================== UMOUNT
-sudo umount /proc/{cpuinfo,diskstats,meminfo,stat,uptime}
+# sudo umount /proc/{cpuinfo,diskstats,meminfo,stat,uptime}
 echo ===================================
 echo running the installer as $(whoami)
 set -x
